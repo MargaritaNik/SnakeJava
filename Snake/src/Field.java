@@ -37,6 +37,7 @@ public class Field {
                 stateCell.put(point, Type.FRUIT);
                 pointInStateCell = true;
             }
+            if (snake.snake.size()+stateCell.size() == stateCell.size()*stateCell.size()) break;
         }
         while (pointInStateCell);
     }
