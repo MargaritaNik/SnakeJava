@@ -1,40 +1,67 @@
 import java.util.*;
+
 public class Snake {
 
-    public LinkedList<Point> snake = new LinkedList();
-
+    public LinkedList<PartOfSnake> snake = new LinkedList();
     private Direction currentDirection;
+    private boolean isFull;
+    public PartOfSnake snakeTail;
+    private boolean isAlive;
 
-    public void setCurrentDirection(Direction direction){
-        if(!direction.isOpposite(currentDirection))
+    public void setCurrentDirection(Direction direction) {
+        if (!direction.isOpposite(currentDirection))
             currentDirection = direction;
     }
 
-    public Direction getCurrentDirection(){
+    public boolean getIsAlive(){
+        return this.isAlive;
+    }
+
+    public void setFull(boolean full) {
+        this.isFull = full;
+    }
+
+    public boolean getIsFull(){
+        return this.isFull;
+    }
+
+    public void killTheSnake(){
+        this.isAlive = false;
+    }
+
+    public Direction getCurrentDirection() {
         return currentDirection;
     }
 
-
-    public Snake(){
-        for (int x = 1; x < 5; x++) {
-            snake.add(new Point(x, 1));
-        }
+    public Snake() {
+        for (int x = 1; x < 5; x++)
+            snake.add(new PartOfSnake(new Point(x, 1)));
+        isFull = false;
+        isAlive = true;
     }
 
-    public void addToTail(Point point){
-        snake.addFirst(point);
+    public void addToTail(Point point) {
+        snake.addFirst(new PartOfSnake(point));
     }
 
-    public void addToHead(Point point){
-        snake.addLast(point);
+    public void addToHead(Point point) {
+        snake.addLast(new PartOfSnake(point));
     }
 
-    public void cutTail(){
+    public void cutTail() {
         snake.removeFirst();
     }
 
-    public void move(Direction direction){
-        addToHead(snake.getLast().add(direction.getShift()));
+    public void move(Direction direction) {
+        addToHead(snake.getLast().coordinate.add(direction.getShift()));
         cutTail();
+    }
+
+    public MapObject pointSearch(Point point){
+        for (PartOfSnake e: snake){
+            if (e.coordinate == point)
+                return e;
+        }
+        return null;
     }
 }

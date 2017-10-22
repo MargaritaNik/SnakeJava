@@ -1,47 +1,44 @@
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;
-import java.util.ArrayList;
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertFalse;
 
-public class TestsSnake{
-    private Field field;
+import static junit.framework.Assert.assertEquals;
+import java.util.*;
+
+public class TestsSnake {
     private Snake snake;
 
     @Before
-    public void init()
-    {
-        field = new Field();
+    public void initialization() {
         snake = new Snake();
     }
+
     @Test
-    public void addToTailTest(){
-        snake.addToTail(new Point(1,2));
-        assertEquals(new Point(1,2), snake.snake.getFirst());
+    public void addToTailTest() {
+        snake.addToTail(new Point(1, 2));
+        assertEquals(new Point(1, 2), snake.snake.getFirst().coordinate);
     }
 
     @Test
     public void addToHeadTest(){
-        snake.addToHead(new Point(5,1));
-        assertEquals(new Point(5,1), snake.snake.getLast());
+        snake.addToHead(new Point(5, 1));
+        assertEquals(new Point(5, 1), snake.snake.getLast().coordinate);
     }
 
     @Test
-    public void cutToTailTest(){
-        Point removePoint = snake.snake.getFirst();
+    public void cutTailTest() {
+        Point deletedPoint = snake.snake.getFirst().coordinate;
         snake.cutTail();
-        assertFalse(snake.snake.contains(removePoint));
+        Assert.assertFalse(snake.snake.contains(new PartOfSnake(deletedPoint)));
     }
+    
     @Test
-    public void testMove(){
-        ArrayList<Point> snakeBeforeMove = new ArrayList<Point>(snake.snake);
-        snake.move(Direction.RIGHT);
-        for(int i = 0; i < snake.snake.size()-1; i++){
-            assertEquals(snake.snake.get(i), snakeBeforeMove.get(i+1));
-        }
-        assertEquals(snake.snake.getLast(), snakeBeforeMove.get(snakeBeforeMove.size()-1).add(Direction.RIGHT.getShift()));
-
+    public void moveTest(){
+        ArrayList<MapObject> beforeMoveSnake = new ArrayList<MapObject>(snake.snake);
+        snake.move(Direction.UP);
+        for (int i = snake.snake.size() - 2; i <= 0; i--)
+            Assert.assertEquals(beforeMoveSnake.get(i), snake.snake.get(i + 1));
     }
 
-    }
+}
 

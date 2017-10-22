@@ -1,5 +1,3 @@
-
-
 public class Main {
 
 
@@ -7,16 +5,12 @@ public class Main {
     static Field field = new Field();
     static Snake snake = new Snake();
 
-
     public static void main(String[] args) {
-        while (true)
-        {
+        while (true) {
+            if (!snake.getIsAlive())
+                break;
             snake.setCurrentDirection(direction);
-            try {
-                Move.move(field,snake, direction);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            Move.move(field, snake, direction);
         }
     }
 

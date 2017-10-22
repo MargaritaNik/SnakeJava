@@ -1,29 +1,27 @@
-public class Move{
-    static boolean fruiteIsEaten = false;
-    static Point tail;
+public class Move {
 
-    public static void move(Field field, Snake snake, Direction changeDir) throws Exception{
-        Point headCoordination = snake.snake.getLast();
-        headCoordination = headCoordination.add(changeDir.getShift());
+    public static void move(Field field, Snake snake, Direction changeDirection) {
+        Point headCoordinate = snake.snake.getLast().coordinate;
+        headCoordinate = headCoordinate.add(changeDirection.getShift());
+        MapObject mapObject = Move.searchObject(field, snake, headCoordinate);
 
-        if (field.stateCell.containsKey(headCoordination) && ((field.stateCell.get(headCoordination)).equals(Type.WALL) ||
-                (field.stateCell.get(headCoordination)).equals(Type.SNAKE)))
-            throw new Exception("Snake crashed");
-
-        if(fruiteIsEaten){
-            snake.addToTail(tail);
-            fruiteIsEaten = false;
+        if (snake.getIsFull()) {
+            snake.addToTail(snake.snakeTail.coordinate);
+            snake.setFull(false);
         }
 
-        System.out.println(field.stateCell.containsKey(headCoordination));
+        if (mapObject != null)
+            mapObject.moveToThisObject(snake);
 
-        if ((field.stateCell.get(headCoordination)).equals(Type.FRUIT)) {
-            tail = snake.snake.getFirst();
-            fruiteIsEaten = true;
-        }
+        snake.move(changeDirection);
 
-        snake.move(changeDir);
-        if (fruiteIsEaten) field.addFruit(snake);
+        if (snake.getIsFull())
+            field.addRandomFruit(snake);
+    }
 
+    public static MapObject searchObject(Field field, Snake snake, Point point){
+        if (field.stateCell.containsKey(point))
+            return field.stateCell.get(point);
+        return snake.pointSearch(point);
     }
 }
