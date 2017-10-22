@@ -1,8 +1,8 @@
 public class Move {
 
-    public static void move(Field field, Snake snake, Direction changeDirection) {
+    public static void move(Field field, Snake snake) {
         Point headCoordinate = snake.snake.getLast().coordinate;
-        headCoordinate = headCoordinate.add(changeDirection.getShift());
+        headCoordinate = headCoordinate.add(snake.getCurrentDirection().getShift());
         MapObject mapObject = Move.searchObject(field, snake, headCoordinate);
 
         if (snake.getIsFull()) {
@@ -13,7 +13,7 @@ public class Move {
         if (mapObject != null)
             mapObject.moveToThisObject(snake);
 
-        snake.move(changeDirection);
+        snake.move();
 
         if (snake.getIsFull())
             field.addRandomFruit(snake);

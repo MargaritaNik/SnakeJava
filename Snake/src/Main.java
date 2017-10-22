@@ -1,6 +1,4 @@
 public class Main {
-
-
     static Direction direction = Direction.RIGHT;
     static Field field = new Field();
     static Snake snake = new Snake();
@@ -10,7 +8,7 @@ public class Main {
             if (!snake.getIsAlive())
                 break;
             snake.setCurrentDirection(direction);
-            Move.move(field, snake, direction);
+            Move.move(field, snake);
         }
     }
 

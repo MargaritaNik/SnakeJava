@@ -35,7 +35,8 @@ public class TestsSnake {
     @Test
     public void moveTest(){
         ArrayList<MapObject> beforeMoveSnake = new ArrayList<MapObject>(snake.snake);
-        snake.move(Direction.UP);
+        snake.setCurrentDirection(Direction.UP);
+        snake.move();
         for (int i = snake.snake.size() - 2; i <= 0; i--)
             Assert.assertEquals(beforeMoveSnake.get(i), snake.snake.get(i + 1));
     }

@@ -17,13 +17,15 @@ public class TestsMove {
 
     @Test
     public void moveToWallTest() {
-        Move.move(field, snake, Direction.DOWN);
+        snake.setCurrentDirection(Direction.DOWN);
+        Move.move(field, snake);
         Assert.assertFalse(snake.getIsAlive());
     }
 
     @Test
-    public void moveSnakeTest() throws Exception {
-        Move.move(field, snake, Direction.RIGHT);
+    public void moveToSnakeTest() throws Exception {
+        snake.setCurrentDirection(Direction.LEFT);
+        Move.move(field, snake);
         assertEquals(2, snake.snake.getFirst().coordinate.getX());
         assertEquals(1, snake.snake.getFirst().coordinate.getY());
         assertEquals(5, snake.snake.getLast().coordinate.getX());
@@ -34,8 +36,9 @@ public class TestsMove {
     @Test
     public void moveToFruitTest() {
         field.stateCell.put(new Point(5, 1), new Fruit());
-        Move.move(field, snake, Direction.RIGHT);
-        Move.move(field, snake, Direction.RIGHT);
+        snake.setCurrentDirection(Direction.RIGHT);
+        Move.move(field, snake);
+        Move.move(field, snake);
         assertEquals(5, snake.snake.size());
 
     }

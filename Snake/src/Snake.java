@@ -38,6 +38,7 @@ public class Snake {
             snake.add(new PartOfSnake(new Point(x, 1)));
         isFull = false;
         isAlive = true;
+        currentDirection = Direction.RIGHT;
     }
 
     public void addToTail(Point point) {
@@ -52,8 +53,8 @@ public class Snake {
         snake.removeFirst();
     }
 
-    public void move(Direction direction) {
-        addToHead(snake.getLast().coordinate.add(direction.getShift()));
+    public void move() {
+        addToHead(snake.getLast().coordinate.add(currentDirection.getShift()));
         cutTail();
     }
 
