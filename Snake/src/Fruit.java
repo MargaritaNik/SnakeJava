@@ -1,5 +1,4 @@
 public class Fruit implements MapObject {
-    public final Type type = Type.FRUIT;
     public final int points;
 
     public Fruit(int points){

@@ -2,10 +2,10 @@ import java.util.*;
 
 public class Snake {
 
-    public LinkedList<PartOfSnake> snake = new LinkedList();
+    public LinkedList<SnakePart> snake = new LinkedList();
     private Direction currentDirection;
     private boolean isFull;
-    public PartOfSnake snakeTail;
+    public SnakePart snakeTail;
     private boolean isAlive;
 
     public void setCurrentDirection(Direction direction) {
@@ -35,18 +35,18 @@ public class Snake {
 
     public Snake() {
         for (int x = 1; x < 5; x++)
-            snake.add(new PartOfSnake(new Point(x, 1)));
+            snake.add(new SnakePart(new Point(x, 1)));
         isFull = false;
         isAlive = true;
         currentDirection = Direction.RIGHT;
     }
 
     public void addToTail(Point point) {
-        snake.addFirst(new PartOfSnake(point));
+        snake.addFirst(new SnakePart(point));
     }
 
     public void addToHead(Point point) {
-        snake.addLast(new PartOfSnake(point));
+        snake.addLast(new SnakePart(point));
     }
 
     public void cutTail() {
@@ -54,13 +54,13 @@ public class Snake {
     }
 
     public void move() {
-        addToHead(snake.getLast().coordinate.add(currentDirection.getShift()));
+        addToHead(snake.getLast().position.add(currentDirection.getShift()));
         cutTail();
     }
 
     public MapObject pointSearch(Point point){
-        for (PartOfSnake e: snake){
-            if (e.coordinate == point)
+        for (SnakePart e: snake){
+            if (e.position == point)
                 return e;
         }
         return null;

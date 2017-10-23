@@ -16,20 +16,20 @@ public class TestsSnake {
     @Test
     public void addToTailTest() {
         snake.addToTail(new Point(1, 2));
-        assertEquals(new Point(1, 2), snake.snake.getFirst().coordinate);
+        assertEquals(new Point(1, 2), snake.snake.getFirst().position);
     }
 
     @Test
     public void addToHeadTest(){
         snake.addToHead(new Point(5, 1));
-        assertEquals(new Point(5, 1), snake.snake.getLast().coordinate);
+        assertEquals(new Point(5, 1), snake.snake.getLast().position);
     }
 
     @Test
     public void cutTailTest() {
-        Point deletedPoint = snake.snake.getFirst().coordinate;
+        Point deletedPoint = snake.snake.getFirst().position;
         snake.cutTail();
-        Assert.assertFalse(snake.snake.contains(new PartOfSnake(deletedPoint)));
+        Assert.assertFalse(snake.snake.contains(new SnakePart(deletedPoint)));
     }
     
     @Test

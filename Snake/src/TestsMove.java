@@ -26,10 +26,10 @@ public class TestsMove {
     public void moveToSnakeTest() throws Exception {
         snake.setCurrentDirection(Direction.LEFT);
         Move.move(field, snake);
-        assertEquals(2, snake.snake.getFirst().coordinate.getX());
-        assertEquals(1, snake.snake.getFirst().coordinate.getY());
-        assertEquals(5, snake.snake.getLast().coordinate.getX());
-        assertEquals(1, snake.snake.getLast().coordinate.getY());
+        assertEquals(2, snake.snake.getFirst().position.getX());
+        assertEquals(1, snake.snake.getFirst().position.getY());
+        assertEquals(5, snake.snake.getLast().position.getX());
+        assertEquals(1, snake.snake.getLast().position.getY());
 
     }
 

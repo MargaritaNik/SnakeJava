@@ -22,6 +22,11 @@ public class Point {
         return new Point(this.x + term.x, this.y + term.y);
     }
 
+    public static Point getRandomPointInSize(int size){
+        Random random = new Random();
+        return new Point(random.nextInt(size), random.nextInt(size));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

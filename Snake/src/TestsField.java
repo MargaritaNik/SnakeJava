@@ -15,7 +15,7 @@ public class TestsField {
 
     @Test
     public void getRandomPointInSizeTest(){
-        Point newRandomPoint = field.getRandomPointInSize();
+        Point newRandomPoint = Point.getRandomPointInSize(field.getSize());
         Assert.assertTrue(newRandomPoint.getX() < field.getSize() && newRandomPoint.getX() >= 0);
         Assert.assertTrue(newRandomPoint.getY() < field.getSize() && newRandomPoint.getY() >= 0);
     }
