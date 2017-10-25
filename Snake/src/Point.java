@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class Point {
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
     public static final Point Zero = new Point(0, 0);
 
     public Point(int x, int y) {
@@ -10,21 +10,8 @@ public class Point {
         this.y = y;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public Point add(Point term) {
         return new Point(this.x + term.x, this.y + term.y);
-    }
-
-    public static Point getRandomPointInSize(int size){
-        Random random = new Random();
-        return new Point(random.nextInt(size), random.nextInt(size));
     }
 
     @Override

@@ -1,3 +1,3 @@
 public interface MapObject {
-    void moveToThisObject(Snake snake);
+    void moveToThisObject(Snake snake, Field field);
 }

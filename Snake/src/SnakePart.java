@@ -1,12 +1,12 @@
 public class SnakePart implements MapObject {
+
     public final Point position;
 
-    public SnakePart(Point position){
+    public SnakePart(Point position) {
         this.position = position;
     }
 
-
-    public void moveToThisObject(Snake snake){
+    public void moveToThisObject(Snake snake, Field field) {
         snake.killTheSnake();
     }
 
@@ -17,11 +17,11 @@ public class SnakePart implements MapObject {
 
         SnakePart snakePart = (SnakePart) o;
 
-        return position.equals(snakePart.position);
+        return position != null ? position.equals(snakePart.position) : snakePart.position == null;
     }
 
     @Override
     public int hashCode() {
-        return position.hashCode();
+        return position != null ? position.hashCode() : 0;
     }
 }

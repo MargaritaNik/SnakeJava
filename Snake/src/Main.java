@@ -7,8 +7,7 @@ public class Main {
         while (true) {
             if (!snake.getIsAlive())
                 break;
-            snake.setCurrentDirection(direction);
-            Move.move(field, snake);
+            Move.move(field, snake, direction);
         }
     }
 

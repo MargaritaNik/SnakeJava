@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Field {
 
@@ -9,7 +10,7 @@ public class Field {
         return size;
     }
 
-    public Map<Point, MapObject> stateCell = new HashMap<Point, MapObject>();
+    private Map<Point, MapObject> stateCell = new HashMap<Point, MapObject>();
 
     public Field() {
         for (int x = 0; x < size; x++) {
@@ -37,19 +38,44 @@ public class Field {
 
     public void addRandomFruit(Snake snake) {
 
-        boolean isNotEmpty = true;
+        boolean pointInStateCell = true;
 
         do {
-            Point newRandomPoint = Point.getRandomPointInSize(size);
-            if (!(stateCell.containsKey(newRandomPoint) && snake.pointSearch(newRandomPoint) == null)) {
+            Point newRandomPoint = getRandomPointInSize();
+            if (!(stateCell.containsKey(newRandomPoint) && snake.objectSearch(newRandomPoint) == null)) {
                 stateCell.put(newRandomPoint, new Fruit());
-                isNotEmpty = false;
+                pointInStateCell = false;
             }
 
-            if (snake.snake.size() + stateCell.size() == size * size)
-                isNotEmpty = false;
+            if (snake.getSnakeSize() + stateCell.size() == size * size)
+                pointInStateCell = false;
 
-        } while (isNotEmpty);
+        } while (pointInStateCell);
     }
 
+    public void deleteFruit(Fruit fruit) {
+        stateCell.remove(fruit);
+    }
+
+    public Point getRandomPointInSize() {
+        Random random = new Random();
+        return new Point(random.nextInt(size), random.nextInt(size));
+    }
+
+    public void remove(Point point) {
+        if (stateCell.containsKey(point))
+            stateCell.remove(point);
+    }
+
+    public void add(Point point, MapObject object) {
+        stateCell.put(point, object);
+
+    }
+
+    public boolean contains(Point point) {
+        return stateCell.containsKey(point);
+    }
+    public MapObject get(Point point){
+        return stateCell.get(point);
+    }
 }

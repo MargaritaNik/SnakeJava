@@ -5,7 +5,7 @@ import org.junit.Before;
 import static junit.framework.Assert.assertEquals;
 import java.util.*;
 
-public class TestsSnake {
+public class TestsSnake{
     private Snake snake;
 
     @Before
@@ -16,30 +16,23 @@ public class TestsSnake {
     @Test
     public void addToTailTest() {
         snake.addToTail(new Point(1, 2));
-        assertEquals(new Point(1, 2), snake.snake.getFirst().position);
+        assertEquals(new Point(1, 2), snake.getSnakeTail().position);
     }
 
     @Test
     public void addToHeadTest(){
         snake.addToHead(new Point(5, 1));
-        assertEquals(new Point(5, 1), snake.snake.getLast().position);
+        assertEquals(new Point(5, 1), snake.getSnakeHead().position);
     }
 
     @Test
     public void cutTailTest() {
-        Point deletedPoint = snake.snake.getFirst().position;
+        Point deletedPoint = snake.getSnakeTail().position;
         snake.cutTail();
-        Assert.assertFalse(snake.snake.contains(new SnakePart(deletedPoint)));
+        Assert.assertFalse(snake.contains(new SnakePart(deletedPoint)));
     }
     
-    @Test
-    public void moveTest(){
-        ArrayList<MapObject> beforeMoveSnake = new ArrayList<MapObject>(snake.snake);
-        snake.setCurrentDirection(Direction.UP);
-        snake.move();
-        for (int i = snake.snake.size() - 2; i <= 0; i--)
-            Assert.assertEquals(beforeMoveSnake.get(i), snake.snake.get(i + 1));
-    }
+
 
 }
 

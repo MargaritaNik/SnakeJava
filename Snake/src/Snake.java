@@ -2,16 +2,12 @@ import java.util.*;
 
 public class Snake {
 
-    public LinkedList<SnakePart> snake = new LinkedList();
-    private Direction currentDirection;
+    private LinkedList<SnakePart> snake = new LinkedList();
     private boolean isFull;
     public SnakePart snakeTail;
     private boolean isAlive;
 
-    public void setCurrentDirection(Direction direction) {
-        if (!direction.isOpposite(currentDirection))
-            currentDirection = direction;
-    }
+
 
     public boolean getIsAlive(){
         return this.isAlive;
@@ -29,16 +25,11 @@ public class Snake {
         this.isAlive = false;
     }
 
-    public Direction getCurrentDirection() {
-        return currentDirection;
-    }
-
     public Snake() {
         for (int x = 1; x < 5; x++)
             snake.add(new SnakePart(new Point(x, 1)));
         isFull = false;
         isAlive = true;
-        currentDirection = Direction.RIGHT;
     }
 
     public void addToTail(Point point) {
@@ -50,19 +41,38 @@ public class Snake {
     }
 
     public void cutTail() {
+        if(snake.size() == 1)
+            isAlive = false;
         snake.removeFirst();
     }
 
-    public void move() {
-        addToHead(snake.getLast().position.add(currentDirection.getShift()));
+    public void move(Direction direction) {
+        addToHead(snake.getLast().position.add(direction.getShift()));
         cutTail();
     }
 
-    public MapObject pointSearch(Point point){
+    public MapObject objectSearch(Point point){
         for (SnakePart e: snake){
             if (e.position == point)
                 return e;
         }
-        return null;
+        return new EmptyObject();
+    }
+
+    public int getSnakeSize(){
+        return snake.size();
+    }
+    public SnakePart getSnakeHead(){
+        return snake.getLast();
+    }
+    public SnakePart getSnakeTail(){
+        return snake.getFirst();
+    }
+    public ArrayList<SnakePart> getSnake(){
+        return new ArrayList<SnakePart>(snake);
+    }
+
+    public boolean contains(SnakePart snakePart){
+        return snake.contains(snakePart);
     }
 }
