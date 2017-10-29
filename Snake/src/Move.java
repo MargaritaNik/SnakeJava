@@ -1,13 +1,13 @@
 public class Move {
-    private static Direction currentDirection = Direction.RIGHT;
+    private static Direction currentDirection;
 
     public static void move(Field field, Snake snake, Direction direction) {
         Point headCoordinate = snake.getSnakeHead().position;
 
-        if (!direction.isOpposite(currentDirection))
-            currentDirection = direction;
+        if (!direction.isOpposite(snake.getCurrentDirection()))
+            snake.setCurrentDirection(direction);
 
-        headCoordinate = headCoordinate.add(currentDirection.getShift());
+        headCoordinate = headCoordinate.add(snake.getCurrentDirection().getShift());
         MapObject mapObject = Move.search(field, snake, headCoordinate);
 
         if (snake.getIsFull()) {
@@ -15,7 +15,7 @@ public class Move {
             snake.setFull(false);
         }
 
-        snake.move(currentDirection);
+        snake.move(snake.getCurrentDirection());
         mapObject.moveToThisObject(snake, field);
 
         if (snake.getIsFull())

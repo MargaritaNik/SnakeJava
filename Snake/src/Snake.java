@@ -6,7 +6,15 @@ public class Snake {
     private boolean isFull;
     public SnakePart snakeTail;
     private boolean isAlive;
+    private Direction currentDirection;
 
+    public void setCurrentDirection(Direction currentDirection) {
+        this.currentDirection = currentDirection;
+    }
+
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
 
 
     public boolean getIsAlive(){
@@ -30,6 +38,17 @@ public class Snake {
             snake.add(new SnakePart(new Point(x, 1)));
         isFull = false;
         isAlive = true;
+        currentDirection = Direction.RIGHT;
+    }
+
+    public Snake(Point tail, int size, Direction direction){
+        for (int i = 0; i < size; i++) {
+            snake.add(new SnakePart(tail));
+            tail = tail.add(direction.getShift());
+        }
+        isFull = false;
+        isAlive = true;
+        currentDirection = direction;
     }
 
     public void addToTail(Point point) {
@@ -53,7 +72,7 @@ public class Snake {
 
     public MapObject objectSearch(Point point){
         for (SnakePart e: snake){
-            if (e.position == point)
+            if (e.position.equals(point))
                 return e;
         }
         return new EmptyObject();

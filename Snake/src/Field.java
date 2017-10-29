@@ -69,7 +69,6 @@ public class Field {
 
     public void add(Point point, MapObject object) {
         stateCell.put(point, object);
-
     }
 
     public boolean contains(Point point) {
