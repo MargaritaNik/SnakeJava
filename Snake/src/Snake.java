@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Snake {
+public class Snake implements Iterable<SnakePart>{
 
     private LinkedList<SnakePart> snake = new LinkedList();
     private boolean isFull;
@@ -8,8 +8,9 @@ public class Snake {
     private boolean isAlive;
     private Direction currentDirection;
 
-    public void setCurrentDirection(Direction currentDirection) {
-        this.currentDirection = currentDirection;
+    public void setCurrentDirection(Direction direction) {
+        if (!direction.isOpposite(currentDirection))
+            currentDirection = direction;
     }
 
     public Direction getCurrentDirection() {
@@ -71,11 +72,11 @@ public class Snake {
     }
 
     public MapObject objectSearch(Point point){
-        for (SnakePart e: snake){
-            if (e.position.equals(point))
-                return e;
-        }
-        return new EmptyObject();
+        return  snake.stream()
+                .filter(x -> x.position.equals(point))
+                .map(x -> (MapObject)x)
+                .findFirst()
+                .orElse(MapObject.Empty);
     }
 
     public int getSnakeSize(){
@@ -93,5 +94,10 @@ public class Snake {
 
     public boolean contains(SnakePart snakePart){
         return snake.contains(snakePart);
+    }
+
+    @Override
+    public Iterator<SnakePart> iterator() {
+        return snake.iterator();
     }
 }
