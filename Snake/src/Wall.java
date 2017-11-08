@@ -1,5 +1,7 @@
 public class Wall implements MapObject{
-    public void moveToThisObject(Snake snake, Field field){
+
+
+    public void moveToThisObject(Snake snake){
         snake.killTheSnake();
     }
 }

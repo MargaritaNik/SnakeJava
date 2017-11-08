@@ -10,9 +10,8 @@ public class Fruit implements MapObject {
         this.points = 50;
     }
 
-    public void moveToThisObject(Snake snake, Field field){
+    public void moveToThisObject(Snake snake){
         snake.setFull(true);
-        snake.snakeTail = snake.getSnakeTail();
-        field.remove(snake.getSnakeHead().position);
+        snake.snakeTail = snake.snake.getFirst();
     }
 }

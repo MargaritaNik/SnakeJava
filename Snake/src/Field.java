@@ -10,7 +10,7 @@ public class Field {
         return size;
     }
 
-    private Map<Point, MapObject> stateCell = new HashMap<Point, MapObject>();
+    public Map<Point, MapObject> stateCell = new HashMap<Point, MapObject>();
 
     public Field() {
         for (int x = 0; x < size; x++) {
@@ -38,23 +38,19 @@ public class Field {
 
     public void addRandomFruit(Snake snake) {
 
-        boolean pointInStateCell = true;
+        boolean pointInStateCell  = true;
 
         do {
             Point newRandomPoint = getRandomPointInSize();
             if (!(stateCell.containsKey(newRandomPoint) && snake.objectSearch(newRandomPoint) == null)) {
                 stateCell.put(newRandomPoint, new Fruit());
-                pointInStateCell = false;
+                pointInStateCell  = false;
             }
 
-            if (snake.getSnakeSize() + stateCell.size() == size * size)
-                pointInStateCell = false;
+            if (snake.snake.size() + stateCell.size() == size * size)
+                pointInStateCell  = false;
 
-        } while (pointInStateCell);
-    }
-
-    public void deleteFruit(Fruit fruit) {
-        stateCell.remove(fruit);
+        } while (pointInStateCell );
     }
 
     public Point getRandomPointInSize() {
@@ -62,19 +58,4 @@ public class Field {
         return new Point(random.nextInt(size), random.nextInt(size));
     }
 
-    public void remove(Point point) {
-        if (stateCell.containsKey(point))
-            stateCell.remove(point);
-    }
-
-    public void add(Point point, MapObject object) {
-        stateCell.put(point, object);
-    }
-
-    public boolean contains(Point point) {
-        return stateCell.containsKey(point);
-    }
-    public MapObject get(Point point){
-        return stateCell.get(point);
-    }
 }

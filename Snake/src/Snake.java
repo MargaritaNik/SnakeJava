@@ -1,22 +1,17 @@
 import java.util.*;
 
-public class Snake implements Iterable<SnakePart>{
+public class Snake {
 
-    private LinkedList<SnakePart> snake = new LinkedList();
+    public LinkedList<SnakePart> snake = new LinkedList();
+    private Direction currentDirection;
     private boolean isFull;
     public SnakePart snakeTail;
     private boolean isAlive;
-    private Direction currentDirection;
 
     public void setCurrentDirection(Direction direction) {
         if (!direction.isOpposite(currentDirection))
             currentDirection = direction;
     }
-
-    public Direction getCurrentDirection() {
-        return currentDirection;
-    }
-
 
     public boolean getIsAlive(){
         return this.isAlive;
@@ -34,22 +29,16 @@ public class Snake implements Iterable<SnakePart>{
         this.isAlive = false;
     }
 
+    public Direction getCurrentDirection() {
+        return currentDirection;
+    }
+
     public Snake() {
         for (int x = 1; x < 5; x++)
             snake.add(new SnakePart(new Point(x, 1)));
         isFull = false;
         isAlive = true;
         currentDirection = Direction.RIGHT;
-    }
-
-    public Snake(Point tail, int size, Direction direction){
-        for (int i = 0; i < size; i++) {
-            snake.add(new SnakePart(tail));
-            tail = tail.add(direction.getShift());
-        }
-        isFull = false;
-        isAlive = true;
-        currentDirection = direction;
     }
 
     public void addToTail(Point point) {
@@ -61,43 +50,19 @@ public class Snake implements Iterable<SnakePart>{
     }
 
     public void cutTail() {
-        if(snake.size() == 1)
-            isAlive = false;
         snake.removeFirst();
     }
 
-    public void move(Direction direction) {
-        addToHead(snake.getLast().position.add(direction.getShift()));
+    public void move() {
+        addToHead(snake.getLast().position.add(currentDirection.getShift()));
         cutTail();
     }
 
     public MapObject objectSearch(Point point){
-        return  snake.stream()
-                .filter(x -> x.position.equals(point))
-                .map(x -> (MapObject)x)
-                .findFirst()
-                .orElse(MapObject.Empty);
-    }
-
-    public int getSnakeSize(){
-        return snake.size();
-    }
-    public SnakePart getSnakeHead(){
-        return snake.getLast();
-    }
-    public SnakePart getSnakeTail(){
-        return snake.getFirst();
-    }
-    public ArrayList<SnakePart> getSnake(){
-        return new ArrayList<SnakePart>(snake);
-    }
-
-    public boolean contains(SnakePart snakePart){
-        return snake.contains(snakePart);
-    }
-
-    @Override
-    public Iterator<SnakePart> iterator() {
-        return snake.iterator();
+        for (SnakePart e: snake){
+            if (e.position == point)
+                return e;
+        }
+        return null;
     }
 }
