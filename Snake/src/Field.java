@@ -42,19 +42,18 @@ public class Field {
 
         do {
             Point newRandomPoint = getRandomPointInSize();
-            if (!(stateCell.containsKey(newRandomPoint) && snake.objectSearch(newRandomPoint) == null)) {
+            if (!stateCell.containsKey(newRandomPoint) || snake.objectSearch(newRandomPoint) != MapObject.EmptyObject) {
                 stateCell.put(newRandomPoint, new Fruit(50, newRandomPoint));
                 pointInStateCell = false;
             }
 
             if (snake.getSnakeSize() + stateCell.size() == size * size)
                 pointInStateCell = false;
-
         } while (pointInStateCell);
     }
 
     public void deleteFruit(Fruit fruit) {
-        stateCell.remove(fruit);
+        stateCell.remove(fruit.position, fruit);
     }
 
     public Point getRandomPointInSize() {

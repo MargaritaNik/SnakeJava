@@ -1,5 +1,4 @@
 public class Move {
-    private static Direction currentDirection;
 
     public static void move(Field field, Snake snake, Direction direction) {
         Point headCoordinate = snake.getSnakeHead().position;
@@ -14,9 +13,6 @@ public class Move {
 
         snake.move(snake.getCurrentDirection());
         mapObject.moveToThisObject(snake, field);
-
-        if (snake.getIsFull())
-            field.addRandomFruit(snake);
     }
 
     public static MapObject search(Field field, Snake snake, Point point){
