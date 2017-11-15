@@ -14,25 +14,25 @@ public class Field {
 
     public Field() {
         for (int x = 0; x < size; x++) {
-            stateCell.put(new Point(x, 0), new Wall());
-            stateCell.put(new Point(x, size - 1), new Wall());
+            stateCell.put(new Point(x, 0), new Wall(new Point(x, 0)));
+            stateCell.put(new Point(x, size - 1), new Wall(new Point(x, size - 1)));
         }
 
         for (int y = 0; y < size; y++) {
-            stateCell.put(new Point(0, y), new Wall());
-            stateCell.put(new Point(size - 1, y), new Wall());
+            stateCell.put(new Point(0, y), new Wall(new Point(0, y)));
+            stateCell.put(new Point(size - 1, y), new Wall(new Point(size - 1, y)));
         }
     }
 
     public Field(int size) {
         for (int x = 0; x < size; x++) {
-            stateCell.put(new Point(x, 0), new Wall());
-            stateCell.put(new Point(x, size - 1), new Wall());
+            stateCell.put(new Point(x, 0), new Wall(new Point(x, 0)));
+            stateCell.put(new Point(x, size - 1), new Wall(new Point(x, size - 1)));
         }
 
         for (int y = 0; y < size; y++) {
-            stateCell.put(new Point(0, y), new Wall());
-            stateCell.put(new Point(size - 1, y), new Wall());
+            stateCell.put(new Point(0, y), new Wall(new Point(0, y)));
+            stateCell.put(new Point(size - 1, y), new Wall(new Point(size - 1, y)));
         }
     }
 
@@ -43,7 +43,7 @@ public class Field {
         do {
             Point newRandomPoint = getRandomPointInSize();
             if (!(stateCell.containsKey(newRandomPoint) && snake.objectSearch(newRandomPoint) == null)) {
-                stateCell.put(newRandomPoint, new Fruit());
+                stateCell.put(newRandomPoint, new Fruit(50, newRandomPoint));
                 pointInStateCell = false;
             }
 
@@ -75,6 +75,8 @@ public class Field {
         return stateCell.containsKey(point);
     }
     public MapObject get(Point point){
-        return stateCell.get(point);
+        if (contains(point))
+            return stateCell.get(point);
+        return MapObject.EmptyObject;
     }
 }

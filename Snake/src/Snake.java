@@ -1,6 +1,7 @@
 import java.util.*;
+import java.util.function.Consumer;
 
-public class Snake {
+public class Snake{
 
     private LinkedList<SnakePart> snake = new LinkedList();
     private boolean isFull;
@@ -8,8 +9,9 @@ public class Snake {
     private boolean isAlive;
     private Direction currentDirection;
 
-    public void setCurrentDirection(Direction currentDirection) {
-        this.currentDirection = currentDirection;
+    public void setCurrentDirection(Direction direction) {
+        if (!direction.isOpposite(currentDirection))
+            currentDirection = direction;
     }
 
     public Direction getCurrentDirection() {
@@ -71,11 +73,12 @@ public class Snake {
     }
 
     public MapObject objectSearch(Point point){
-        for (SnakePart e: snake){
-            if (e.position.equals(point))
-                return e;
-        }
-        return new EmptyObject();
+        return snake
+                .stream()
+                .filter(x -> x.position.equals(point))
+                .map(x -> (MapObject)x)
+                .findFirst()
+                .orElse(MapObject.EmptyObject);
     }
 
     public int getSnakeSize(){

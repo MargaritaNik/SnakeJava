@@ -11,7 +11,7 @@ public enum Direction {
     }
 
     public boolean isOpposite(Direction direction){
-       return this.shift.add(direction.getShift()).equals(new Point(0,0));
+       return this.shift.add(direction.getShift()).equals(Point.Zero);
     }
 
     public Point getShift() {

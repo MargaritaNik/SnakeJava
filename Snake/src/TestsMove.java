@@ -27,7 +27,7 @@ public class TestsMove {
 
     @Test
     public void moveToFruitTest() {
-        field.add(new Point(6, 1), new Fruit());
+        field.add(new Point(6, 1), new Fruit(50, new Point(6, 1)));
         Move.move(field, snake, Direction.RIGHT);
         Move.move(field, snake, Direction.RIGHT);
         assertEquals(6, snake.getSnakeSize());
@@ -37,7 +37,7 @@ public class TestsMove {
 
     @Test
     public void moveToWallTest() {
-        field.add(snake.getSnakeHead().position.add(Direction.RIGHT.getShift()), new Wall());
+        field.add(snake.getSnakeHead().position.add(Direction.RIGHT.getShift()), new Wall(snake.getSnakeHead().position.add(Direction.RIGHT.getShift())));
         Move.move(field, snake, Direction.RIGHT);
         Assert.assertFalse(snake.getIsAlive());
     }

@@ -3,10 +3,7 @@ public class Move {
 
     public static void move(Field field, Snake snake, Direction direction) {
         Point headCoordinate = snake.getSnakeHead().position;
-
-        if (!direction.isOpposite(snake.getCurrentDirection()))
-            snake.setCurrentDirection(direction);
-
+        snake.setCurrentDirection(direction);
         headCoordinate = headCoordinate.add(snake.getCurrentDirection().getShift());
         MapObject mapObject = Move.search(field, snake, headCoordinate);
 
@@ -20,13 +17,11 @@ public class Move {
 
         if (snake.getIsFull())
             field.addRandomFruit(snake);
-
     }
 
     public static MapObject search(Field field, Snake snake, Point point){
         if (field.contains(point))
             return field.get(point);
         return snake.objectSearch(point);
-
     }
 }

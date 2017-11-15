@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 public class SnakePart implements MapObject {
 
     public final Point position;
@@ -9,6 +11,8 @@ public class SnakePart implements MapObject {
     public void moveToThisObject(Snake snake, Field field) {
         snake.killTheSnake();
     }
+
+    public Color getColor(){ return Color.GREEN;}
 
     @Override
     public boolean equals(Object o) {
