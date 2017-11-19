@@ -6,13 +6,12 @@ public class Move {
         headCoordinate = headCoordinate.add(snake.getCurrentDirection().getShift());
         MapObject mapObject = Move.search(field, snake, headCoordinate);
 
+        mapObject.moveToThisObject(snake, field);
+        snake.move(snake.getCurrentDirection());
         if (snake.getIsFull()) {
             snake.addToTail(snake.snakeTail.position);
             snake.setFull(false);
         }
-
-        snake.move(snake.getCurrentDirection());
-        mapObject.moveToThisObject(snake, field);
     }
 
     public static MapObject search(Field field, Snake snake, Point point){

@@ -42,7 +42,7 @@ public class Field {
 
         do {
             Point newRandomPoint = getRandomPointInSize();
-            if (!stateCell.containsKey(newRandomPoint) || snake.objectSearch(newRandomPoint) != MapObject.EmptyObject) {
+            if (!stateCell.containsKey(newRandomPoint) && snake.objectSearch(newRandomPoint) == MapObject.EmptyObject) {
                 stateCell.put(newRandomPoint, new Fruit(50, newRandomPoint));
                 pointInStateCell = false;
             }
@@ -73,7 +73,8 @@ public class Field {
     public boolean contains(Point point) {
         return stateCell.containsKey(point);
     }
-    public MapObject get(Point point){
+
+    public MapObject get(Point point) {
         if (contains(point))
             return stateCell.get(point);
         return MapObject.EmptyObject;

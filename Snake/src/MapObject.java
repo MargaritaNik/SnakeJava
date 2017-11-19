@@ -1,12 +1,14 @@
-import java.awt.Color;
+import Models.Model;
 
 public interface MapObject {
     MapObject EmptyObject = new MapObject() {
-        public void moveToThisObject(Snake snake, Field field) {}
-        public Color getColor(){return null;}
+        public Model getModel() {
+            return Model.EmptyModel;
+        }
+
+        public void moveToThisObject(Snake snake, Field field) { }
     };
+    Model getModel();
 
     void moveToThisObject(Snake snake, Field field);
-
-    Color getColor();
 }

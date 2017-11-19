@@ -1,3 +1,5 @@
+import Models.*;
+
 import java.awt.Color;
 
 public class Wall implements MapObject{
@@ -13,5 +15,7 @@ public class Wall implements MapObject{
         snake.killTheSnake();
     }
 
-
+    public Model getModel(){
+        return new WallModel();
+    }
 }

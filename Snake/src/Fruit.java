@@ -1,4 +1,5 @@
 import java.awt.Color;
+import Models.*;
 
 public class Fruit implements MapObject {
 
@@ -16,6 +17,11 @@ public class Fruit implements MapObject {
         snake.setFull(true);
         snake.snakeTail = snake.getSnakeTail();
         field.deleteFruit(this);
+        field.addRandomFruit(snake);
+    }
+
+    public Model getModel() {
+        return new FruitModel();
     }
 
     @Override

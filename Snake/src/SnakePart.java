@@ -1,3 +1,5 @@
+import Models.*;
+
 import java.awt.Color;
 
 public class SnakePart implements MapObject {
@@ -12,7 +14,9 @@ public class SnakePart implements MapObject {
         snake.killTheSnake();
     }
 
-    public Color getColor(){ return Color.GREEN;}
+    public Model getModel(){
+        return new SnakeModel();
+    }
 
     @Override
     public boolean equals(Object o) {

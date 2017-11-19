@@ -1,31 +1,27 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class Main {
     static Direction direction = Direction.RIGHT;
     static Field field = new Field();
     static Snake snake = new Snake();
-    static GameWindow gameWindow = new GameWindow(){
+    static GameWindow gameWindow = new GameWindow() {
 
-        public void paint(Graphics graphics){
-            Graphics2D graphics2D = (Graphics2D)graphics.create();
+        public void paint(Graphics graphics) {
+            Graphics2D graphics2D = (Graphics2D) graphics.create();
             graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            Color currentColor;
             for (int x = 0; x < 20; x++)
-                for (int y = 0; y < 20; y++) {
-                    currentColor = Move.search(field, snake, new Point(x, y)).getColor();
-                    if (currentColor == Color.BLACK)
-                        graphics2D.draw3DRect(x * 20, y * 20, 20, 20, true);
-                    if (currentColor == Color.GREEN) {
-                        graphics2D.draw3DRect(x * 20, y * 20, 20, 20, true);
-                        graphics2D.draw3DRect(x * 20 + 3, y * 20 + 3, 14, 14, true);
-                        graphics2D.draw3DRect(x * 20 + 6, y * 20 + 6, 8, 8, true);
-                        graphics2D.draw3DRect(x * 20 + 9, y * 20 + 9, 2, 2, true);
-                    }
-                    if (currentColor == Color.RED)
-                        graphics2D.drawOval(x*20, y*20, 20, 20);
-                }
+                for (int y = 0; y < 20; y++)
+                    Move.search(field, snake, new Point(x, y)).getModel().drawCell(graphics2D, x, y);
+            Point head = snake.getSnakeHead().position;
+            graphics2D.setColor(new Color(134, 136,  138));
+            graphics2D.draw3DRect(head.x * 20 + 1, 380 - head.y * 20 + 1, 18, 18, false);
+            graphics2D.draw3DRect(head.x * 20 + 2, 380 - head.y * 20 + 2, 16, 16, false);
+            graphics2D.draw3DRect(head.x * 20 + 7, 380 - head.y * 20 + 7, 6, 6, false);
+            graphics2D.draw3DRect(head.x * 20 + 8, 380 - head.y * 20 + 8, 4, 4, false);
         }
     };
 
@@ -39,16 +35,17 @@ public class Main {
                 frame.setVisible(true);
             }
         });
-        field.add(new Point(11, 1), new Fruit(50, new Point(11, 1)));
-        while (true) {
-            if (!snake.getIsAlive())
-                break;
-            if (snake.getIsFull())
-                field.addRandomFruit(snake);
-            gameWindow.repaint();
-            Move.move(field, snake, direction);
-            TimeUnit.MILLISECONDS.sleep(2000);
-        }
+        gameWindow.addKeyListener(new KeyControl());
+        gameWindow.setFocusable(true);
+        field.addRandomFruit(snake);
+        while (snake.getIsAlive())
+            makeTurn();
+    }
+
+    public static void makeTurn() throws InterruptedException {
+        gameWindow.repaint();
+        Move.move(field, snake, direction);
+        TimeUnit.MILLISECONDS.sleep(500);
     }
 
 }
