@@ -17,11 +17,13 @@ public class Main {
                 for (int y = 0; y < 20; y++)
                     Move.search(field, snake, new Point(x, y)).getModel().drawCell(graphics2D, x, y);
             Point head = snake.getSnakeHead().position;
-            graphics2D.setColor(new Color(134, 136,  138));
-            graphics2D.draw3DRect(head.x * 20 + 1, 380 - head.y * 20 + 1, 18, 18, false);
-            graphics2D.draw3DRect(head.x * 20 + 2, 380 - head.y * 20 + 2, 16, 16, false);
-            graphics2D.draw3DRect(head.x * 20 + 7, 380 - head.y * 20 + 7, 6, 6, false);
-            graphics2D.draw3DRect(head.x * 20 + 8, 380 - head.y * 20 + 8, 4, 4, false);
+            graphics2D.setColor(new Color(76, 76,  76));
+            graphics2D.draw3DRect(head.x * 30 + 1, 570 - head.y * 30 + 1, 28, 28, false);
+            graphics2D.draw3DRect(head.x * 30 + 2, 570 - head.y * 30 + 2, 26, 26, false);
+            graphics2D.draw3DRect(head.x * 30 + 7, 570 - head.y * 30 + 7, 16, 16, false);
+            graphics2D.draw3DRect(head.x * 30 + 8, 570 - head.y * 30 + 8, 14, 14, false);
+            graphics2D.draw3DRect(head.x * 30 + 13, 570 - head.y * 30 + 13, 4, 4, false);
+            //graphics2D.draw3DRect(head.x * 30 + 8, 570 - head.y * 30 + 8, 14, 14, false);
         }
     };
 

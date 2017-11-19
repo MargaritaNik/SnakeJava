@@ -11,8 +11,6 @@ public class Fruit implements MapObject {
         this.position = position;
     }
 
-    public Color getColor(){ return Color.RED;}
-
     public void moveToThisObject(Snake snake, Field field) {
         snake.setFull(true);
         snake.snakeTail = snake.getSnakeTail();
