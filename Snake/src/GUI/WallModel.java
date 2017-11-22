@@ -1,12 +1,8 @@
-package Models;
+package GUI;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.IOException;
 
+//public class WallModel implements Model, ImageObserver{
 public class WallModel implements Model{
 //    public void drawCell(Graphics2D graphics2D, int x, int y){
 //        graphics2D.draw3DRect(x * 30, 570 - y * 30, 30, 30, true);
@@ -15,7 +11,7 @@ public void drawCell(Graphics2D graphics2D, int x, int y){
     graphics2D.draw3DRect(x*30, 570 - y*30, 30, 30, true);
 //    BufferedImage img = null;
 //    try {
-//        img = ImageIO.read(new File("Snake\\src\\images\\wall.jpg"));
+//        img = ImageIO.read(new File("Logic.Snake\\src\\images\\wall.jpg"));
 //    } catch (IOException e){}
 //    graphics2D.drawImage(img, x*30, 570 - y*30, 30, 30, this);
 }
