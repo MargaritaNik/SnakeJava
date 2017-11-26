@@ -3,8 +3,9 @@ package Logic;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.io.Serializable;
 
-public class Field {
+public class Field implements Serializable{
 
     private int size = 20;
 

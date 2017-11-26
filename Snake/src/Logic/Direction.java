@@ -1,6 +1,8 @@
 package Logic;
 
-public enum Direction {
+import java.io.Serializable;
+
+public enum Direction implements Serializable{
     UP(new Point(0, 1)),
     RIGHT(new Point(1, 0)),
     LEFT(new Point(-1, 0)),

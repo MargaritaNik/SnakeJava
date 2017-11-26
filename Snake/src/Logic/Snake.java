@@ -1,8 +1,9 @@
 package Logic;
 
 import java.util.*;
+import java.io.Serializable;
 
-public class Snake{
+public class Snake implements Serializable{
 
     private LinkedList<SnakePart> snake = new LinkedList();
     private boolean isFull;

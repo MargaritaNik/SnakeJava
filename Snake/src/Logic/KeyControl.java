@@ -1,10 +1,8 @@
-package GUI;
-
-import Logic.Direction;
-import Logic.Main;
+package Logic;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class KeyControl extends KeyAdapter {
     public void keyPressed(KeyEvent keyEvent){
@@ -17,5 +15,19 @@ public class KeyControl extends KeyAdapter {
             Main.direction = Direction.LEFT;
         if (key == KeyEvent.VK_UP)
             Main.direction = Direction.UP;
+        if (key == KeyEvent.VK_S)
+            try {
+                SaveLoader.save();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        if (key == KeyEvent.VK_L)
+            try {
+                SaveLoader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
     }
 }

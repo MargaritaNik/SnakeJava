@@ -1,10 +1,11 @@
 package Logic;
 
 import GUI.*;
+import java.io.Serializable;
 
 import java.awt.Color;
 
-public class Wall implements MapObject{
+public class Wall implements MapObject, Serializable{
     public final Point position;
 
     public Wall(Point point){

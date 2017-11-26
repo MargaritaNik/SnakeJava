@@ -1,6 +1,8 @@
 package Logic;
 
-public class Point {
+import java.io.Serializable;
+
+public class Point implements Serializable{
     public final int x;
     public final int y;
     public static final Point Zero = new Point(0, 0);

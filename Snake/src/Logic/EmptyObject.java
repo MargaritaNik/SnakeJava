@@ -1,8 +1,9 @@
 package Logic;
 
 import GUI.IVisitor;
+import java.io.Serializable;
 
-public class EmptyObject implements MapObject {
+public class EmptyObject implements MapObject, Serializable {
     public void moveToThisObject(Snake snake, Field field) {};
 
     public void accept(IVisitor visitor){

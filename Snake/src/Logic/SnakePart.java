@@ -1,8 +1,9 @@
 package Logic;
 
 import GUI.*;
+import java.io.Serializable;
 
-public class SnakePart implements MapObject {
+public class SnakePart implements MapObject, Serializable {
 
     public final Point position;
 

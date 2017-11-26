@@ -1,8 +1,9 @@
 package Logic;
 
 import GUI.*;
+import java.io.Serializable;
 
-public class Fruit implements MapObject {
+public class Fruit implements MapObject, Serializable {
 
     public final int points;
     public final Point position;
