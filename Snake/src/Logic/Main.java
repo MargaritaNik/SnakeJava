@@ -2,6 +2,7 @@ package Logic;
 
 import GUI.Frame;
 import GUI.GameWindow;
+import GUI.Sound;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,15 +26,21 @@ public class Main {
         });
         gameWindow.addKeyListener(new KeyControl());
         gameWindow.setFocusable(true);
+        Sound.playSound("Snake\\src\\music\\eye_of_tiger.wav").play();
         field.addRandomFruit(snake);
-        while (snake.getIsAlive())
-            makeTurn();
+        while (true) {
+                makeTurn();
+        }
     }
 
     public static void makeTurn() throws InterruptedException {
-        gameWindow.repaint();
-        Move.move(field, snake, direction);
-        TimeUnit.MILLISECONDS.sleep(500);
+        if (snake.getIsAlive()){
+            gameWindow.repaint();
+            Move.move(field, snake, direction);
+            TimeUnit.MILLISECONDS.sleep(500);
+        }
+        else
+            gameWindow.paintGameOver();
     }
 
 }

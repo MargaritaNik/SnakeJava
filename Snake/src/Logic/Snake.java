@@ -69,8 +69,14 @@ public class Snake implements Serializable{
         snake.removeFirst();
     }
 
-    public void move(Direction direction) {
-        addToHead(snake.getLast().position.add(direction.getShift()));
+    public void move(Direction direction, int fieldSize) {
+        Point head = new Point(snake.getLast().position.add(direction.getShift()).x % fieldSize,
+                snake.getLast().position.add(direction.getShift()).y % fieldSize );
+        if (head.x == -1)
+            head = new Point(fieldSize - 1, head.y);
+        if (head.y == -1)
+            head = new Point(head.x, fieldSize - 1);
+        addToHead(head);
         cutTail();
     }
 

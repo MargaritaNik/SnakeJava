@@ -27,10 +27,6 @@ public class GameWindow extends JComponent{
         paintHead(graphics2D, Main.snake.getSnakeHead().position);
     }
 
-    public void update(Graphics2D graphics2D){
-        paint(graphics2D);
-    }
-
     public void paintCell(MapObject object, Graphics2D graphics2D, int x, int y){
         Visitor visitor = new Visitor(graphics2D, new Point(x, y));
         object.accept(visitor);
@@ -40,7 +36,20 @@ public class GameWindow extends JComponent{
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("Snake\\src\\images\\head.png"));
-        } catch (IOException e){}
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
         graphics2D.drawImage(img, head.x*30, 570 - head.y*30, 30, 30, this);
+    }
+
+    public void paintGameOver(){
+        Graphics graphics = getGraphics();
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("Snake\\src\\images\\game_over.jpg"));
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+        graphics.drawImage(img, 0, 0, 600, 600, this);
     }
 }

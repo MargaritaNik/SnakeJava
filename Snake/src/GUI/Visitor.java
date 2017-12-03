@@ -24,7 +24,9 @@ public class Visitor implements IVisitor, ImageObserver {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("Snake\\src\\images\\apple.png"));
-        } catch (IOException e){}
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
         graphics2D.drawImage(img, position.x*30, 570 - position.y*30, 30, 30, this);
     }
 
@@ -38,14 +40,10 @@ public class Visitor implements IVisitor, ImageObserver {
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("Snake\\src\\images\\body.png"));
-        } catch (IOException e){}
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
         graphics2D.drawImage(img, position.x*30, 570 - position.y*30, 30, 30, this);
-//        graphics2D.draw3DRect(position.x * 30, 570 - position.y * 30, 30, 30, true);
-//        graphics2D.draw3DRect(position.x * 30 + 3, 570 - position.y * 30 + 3, 24, 24, true);
-//        graphics2D.draw3DRect(position.x * 30 + 6, 570 - position.y * 30 + 6, 18, 18, true);
-//        graphics2D.draw3DRect(position.x * 30 + 9, 570 - position.y * 30 + 9, 12, 12, true);
-//        graphics2D.draw3DRect(position.x * 30 + 12, 570 - position.y * 30 + 12, 6, 6, true);
-//        graphics2D.draw3DRect(position.x * 30 + 14, 570 - position.y * 30 + 14, 2, 2, true);
     }
 
     public boolean imageUpdate(Image img, int status, int x, int y, int height, int width){

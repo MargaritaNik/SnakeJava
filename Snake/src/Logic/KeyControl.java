@@ -29,5 +29,11 @@ public class KeyControl extends KeyAdapter {
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+        if (key == KeyEvent.VK_R){
+            Main.snake = new Snake();
+            Main.direction = Direction.RIGHT;
+            Main.field = new Field();
+            Main.field.addRandomFruit(Main.snake);
+        }
     }
 }

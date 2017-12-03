@@ -46,7 +46,7 @@ public class TestsMove {
     @Test
     public void moveTest(){
         ArrayList<SnakePart> beforeMoveSnake = snake.getSnake();
-        snake.move(Direction.UP);
+        snake.move(Direction.UP, 20);
         beforeMoveSnake.remove(0);
         beforeMoveSnake.add(beforeMoveSnake.size(),
                 new SnakePart(beforeMoveSnake.get(beforeMoveSnake.size()-1).position.add(Direction.UP.getShift())));

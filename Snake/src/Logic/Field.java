@@ -16,15 +16,6 @@ public class Field implements Serializable{
     private Map<Point, MapObject> stateCell = new HashMap<Point, MapObject>();
 
     public Field() {
-        for (int x = 0; x < size; x++) {
-            stateCell.put(new Point(x, 0), new Wall(new Point(x, 0)));
-            stateCell.put(new Point(x, size - 1), new Wall(new Point(x, size - 1)));
-        }
-
-        for (int y = 0; y < size; y++) {
-            stateCell.put(new Point(0, y), new Wall(new Point(0, y)));
-            stateCell.put(new Point(size - 1, y), new Wall(new Point(size - 1, y)));
-        }
     }
 
     public Field(int size) {
