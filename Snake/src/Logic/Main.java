@@ -26,7 +26,7 @@ public class Main {
         });
         gameWindow.addKeyListener(new KeyControl());
         gameWindow.setFocusable(true);
-        Sound.playSound("Snake\\src\\music\\eye_of_tiger.wav").play();
+        Sound.playSound("Snake\\src\\music\\music.wav").play();
         field.addRandomFruit(snake);
         while (true) {
                 makeTurn();
