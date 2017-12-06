@@ -1,6 +1,7 @@
 package Logic;
 
 import GUI.*;
+
 import java.io.Serializable;
 
 public class SnakePart implements MapObject, Serializable {
@@ -12,10 +13,10 @@ public class SnakePart implements MapObject, Serializable {
     }
 
     public void moveToThisObject(Snake snake, Field field) {
-        snake.killTheSnake();
+        snake.setAlive(false);
     }
 
-    public void accept(IVisitor visitor){
+    public void accept(IVisitor visitor) {
         visitor.paint(this);
     }
 

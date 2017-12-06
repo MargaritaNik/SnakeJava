@@ -6,13 +6,16 @@ import GUI.Sound;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
+import java.io.File;
 
 public class Main {
     static public Direction direction = Direction.RIGHT;
     static public Field field = new Field();
     static public Snake snake = new Snake();
-    static GameWindow gameWindow = new GameWindow();
+    static private GameWindow gameWindow = new GameWindow();
+    static Sound gameSound = new Sound(new File("Snake\\src\\music\\tetris.wav"));
+    static Sound gameOverSound = new Sound(new File("Snake\\src\\music\\game_over.wav"));
+    static Sound eatSound = new Sound(new File("Snake\\src\\music\\sonic_ring.wav"));
 
     public static void main(String[] args) throws InterruptedException {
         EventQueue.invokeLater(new Runnable() {
@@ -26,21 +29,23 @@ public class Main {
         });
         gameWindow.addKeyListener(new KeyControl());
         gameWindow.setFocusable(true);
-        Sound.playSound("Snake\\src\\music\\music.wav").play();
+        gameSound.play();
         field.addRandomFruit(snake);
-        while (true) {
-                makeTurn();
-        }
+        Timer timer = new Timer(100, e -> makeTurn());
+        timer.start();
     }
 
-    public static void makeTurn() throws InterruptedException {
-        if (snake.getIsAlive()){
+    private static void makeTurn() {
+        if (snake.getIsAlive()) {
+            if (!gameSound.isPlaying())
+                gameSound.play();
             gameWindow.repaint();
             Move.move(field, snake, direction);
-            TimeUnit.MILLISECONDS.sleep(500);
-        }
-        else
+        } else {
+            if (!gameOverSound.isPlaying())
+                gameOverSound.play();
             gameWindow.paintGameOver();
+        }
     }
 
 }

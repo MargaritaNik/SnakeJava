@@ -44,7 +44,7 @@ public class Sound {
     //Запуск
 	/*
 	  breakOld определяет поведение, если звук уже играется
-	  Если reakOld==true, о звук будет прерван и запущен заново
+	  Если breakOld==true, о звук будет прерван и запущен заново
 	  Иначе ничего не произойдёт
 	*/
     public void play(boolean breakOld) {

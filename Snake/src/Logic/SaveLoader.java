@@ -4,31 +4,21 @@ import java.io.*;
 
 public class SaveLoader {
     public static void save() throws IOException {
-        FileOutputStream saveOutputStream = null;
-        ObjectOutputStream saveOS = null;
-        try {
-            saveOutputStream = new FileOutputStream("Snake\\src\\saves\\save.txt");
-            saveOS = new ObjectOutputStream(saveOutputStream);
+        try(ObjectOutputStream saveOS = new ObjectOutputStream(new FileOutputStream("Snake\\src\\saves\\save.txt"))) {
             saveOS.writeObject(new GameSave());
-        } finally {
-            saveOS.close();
-            saveOutputStream.close();
+        } catch (IOException e){
+            throw new RuntimeException(e);
         }
     }
 
     public static void load() throws IOException, ClassNotFoundException {
-        FileInputStream loadInputStream = null;
-        ObjectInputStream loadIS = null;
-        try {
-            loadInputStream = new FileInputStream("Snake\\src\\saves\\save.txt");
-            loadIS = new ObjectInputStream(loadInputStream);
+        try (ObjectInputStream loadIS = new ObjectInputStream(new FileInputStream("Snake\\src\\saves\\save.txt"))){
             GameSave gameSave = (GameSave) loadIS.readObject();
             Main.field = gameSave.field;
             Main.snake = gameSave.snake;
             Main.direction = gameSave.direction;
-        } finally {
-            loadIS.close();
-            loadInputStream.close();
+        } catch (IOException | ClassNotFoundException e){
+            throw new RuntimeException(e);
         }
     }
 }

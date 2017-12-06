@@ -14,6 +14,7 @@ public class Fruit implements MapObject, Serializable {
     }
 
     public void moveToThisObject(Snake snake, Field field) {
+        Main.eatSound.play(false);
         snake.setFull(true);
         snake.snakeTail = snake.getSnakeTail();
         field.deleteFruit(this);

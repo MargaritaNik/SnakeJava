@@ -24,12 +24,15 @@ public class KeyControl extends KeyAdapter {
         if (key == KeyEvent.VK_L)
             try {
                 SaveLoader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+                Main.gameOverSound.stop();
+                if (!Main.gameSound.isPlaying())
+                    Main.gameSound.play();
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             }
         if (key == KeyEvent.VK_R){
+            Main.gameOverSound.stop();
+            Main.gameSound.play();
             Main.snake = new Snake();
             Main.direction = Direction.RIGHT;
             Main.field = new Field();

@@ -25,16 +25,25 @@ public class Snake implements Serializable{
         return this.isAlive;
     }
 
+    public void setAlive(boolean isAlive){
+        if (isAlive){
+            Main.gameOverSound.stop();
+            Main.gameSound.play();
+            this.isAlive = isAlive;
+        }
+        else{
+            Main.gameSound.stop();
+            Main.gameOverSound.play();
+            this.isAlive = isAlive;
+        }
+    }
+
     public void setFull(boolean full) {
         this.isFull = full;
     }
 
     public boolean getIsFull(){
         return this.isFull;
-    }
-
-    public void killTheSnake(){
-        this.isAlive = false;
     }
 
     public Snake() {

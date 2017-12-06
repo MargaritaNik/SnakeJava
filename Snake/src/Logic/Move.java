@@ -7,7 +7,8 @@ public class Move {
         Point headCoordinate = getNextCoordinate(snake, field);
         MapObject mapObject = Move.search(field, snake, headCoordinate);
 
-        mapObject.moveToThisObject(snake, field);
+        if (mapObject != snake.getSnakeTail())
+            mapObject.moveToThisObject(snake, field);
         snake.move(snake.getCurrentDirection(), field.getSize());
         if (snake.getIsFull()) {
             snake.addToTail(snake.snakeTail.position);

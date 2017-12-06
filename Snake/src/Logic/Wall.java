@@ -15,7 +15,7 @@ public class Wall implements MapObject, Serializable{
     public Color getColor(){ return Color.BLACK;}
 
     public void moveToThisObject(Snake snake, Field field){
-        snake.killTheSnake();
+        snake.setAlive(false);
     }
 
     public void accept(IVisitor visitor){

@@ -47,8 +47,6 @@ public class Visitor implements IVisitor, ImageObserver {
     }
 
     public boolean imageUpdate(Image img, int status, int x, int y, int height, int width){
-        if((status & ALLBITS) != 1)
-            return true;
-        return false;
+        return(status & ALLBITS) != 1;
     }
 }
